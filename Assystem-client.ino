@@ -6,6 +6,14 @@
 #define SS_PIN D4
 #define RST_PIN D2
 
+#ifndef STASSID
+#define STASSID "YOUR-WIFI-NAME"
+#define STAPSK  "YOUR-WIFI-PASSWORD"
+#endif
+
+const char* ssid     = STASSID;
+const char* password = STAPSK;
+
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Instance of the class
 void setup() {
   Serial.begin(9600);
@@ -13,7 +21,18 @@ void setup() {
   mfrc522.PCD_Init();
   Serial.println("Reading RFID");
   Serial.println();
-
+  Serial.print("Connecting to wifi: ");
+  Serial.print(ssid);
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  } 
+  Serial.println();
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.print(WiFi.localIP());
 }
 
 void loop() {
