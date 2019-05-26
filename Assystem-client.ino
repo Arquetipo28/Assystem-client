@@ -15,6 +15,8 @@ const char* ssid     = STASSID;
 const char* password = STAPSK;
 
 const char* host = "https://YOUR.WEB.SERVER/YOUR-ROUTE";
+const char* location = "LOCATION_ID";
+const char* section = "SECTION_ID";
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Instance of the class
 void setup() {
   Serial.begin(9600);
@@ -63,7 +65,7 @@ void loop() {
   http.addHeader("Content-Type", "application/json"); //Specify content-type header  
   http.addHeader("Accept", "application/json");
   Serial.println(card);
-  String json = "{\"uid\":\"" + String(card) + "\", \"token\":\"OP-ASSYSTEM-AP2\"}";
+  String json = "{\"uid\":\"" + String(card) + "\", \"token\":\"OP-ASSYSTEM-AP2\", \"location\":\""+ location +"\", \"section\":\"" + section + "\" }";
   int httpCode = http.POST(json);  //Send the request
   String payload = http.getString(); //Get the response payload 
   Serial.print("Response: ");
