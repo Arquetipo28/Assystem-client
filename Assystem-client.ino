@@ -54,7 +54,11 @@ void loop() {
       Serial.println(a);
       Serial.println();
       mfrc522.PICC_HaltA();
+    } else {
+      Serial.println("Cannot read the card");
     }
+  } else {
+    Serial.println("No card present");
   }
 }
 
@@ -72,8 +76,11 @@ void loop() {
    Serial.print("Response: ");
    Serial.print(httpCode);
    Serial.println();
+   http.end();
    return payload;  
   } else {
-    return "Error";
+    http.end();
+    Serial.println("Error");
+    return "Cannot connect to server";
   }
  }
