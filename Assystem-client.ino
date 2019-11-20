@@ -14,7 +14,7 @@
 const char* ssid     = STASSID;
 const char* password = STAPSK;
 
-const char* host = "http://b431117e.ngrok.io/api/v1/entries/create";
+const char* host = "http://api-vp2mx-com.herokuapp.com/api/v1/entries/create";
 const char* location = "S01";
 const char* section = "SECTION_ID";
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Instance of the class
@@ -54,11 +54,7 @@ void loop() {
       Serial.println(a);
       Serial.println();
       mfrc522.PICC_HaltA();
-    } else {
-      Serial.println("Cannot read the card");
     }
-  } else {
-    Serial.println("No card present");
   }
 }
 
