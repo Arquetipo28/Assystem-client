@@ -81,11 +81,21 @@ String postValues(unsigned long card) {
   int httpCode = http.POST(json);  //Send the request
   String payload = http.getString(); //Get the response payload
   if (httpCode == 200) {
+<<<<<<< HEAD
     Serial.print("Response: ");
     Serial.print(httpCode);
     Serial.println();
     return payload;
+=======
+   Serial.print("Response: ");
+   Serial.print(httpCode);
+   Serial.println();
+   http.end();
+   return payload;  
+>>>>>>> 0da52bdd4cf10afa87ac6cf870be6ec7a6789a87
   } else {
-    return "Error";
+    http.end();
+    Serial.println("Error");
+    return "Cannot connect to server";
   }
 }
